@@ -5,9 +5,11 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Heart Surprise 💓</title>
 
+<link href="https://fonts.googleapis.com/css2?family=Patrick+Hand&display=swap" rel="stylesheet">
+
 <style>
 body {
-    font-family: 'Comic Sans MS', cursive;
+    font-family: 'Patrick Hand', cursive;
     text-align: center;
     overflow-x: hidden;
     min-height: 100vh;
@@ -34,10 +36,17 @@ button {
     cursor: pointer;
     transition: 0.3s;
     box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+    animation: pulse 1.5s infinite;
 }
 
 button:hover {
     transform: scale(1.1);
+}
+
+@keyframes pulse {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.08); }
+    100% { transform: scale(1); }
 }
 
 #message {
@@ -51,54 +60,47 @@ button:hover {
 
 .emoji {
     position: absolute;
-    animation: floatUp 2s ease-out forwards;
+    animation: floatUp 2.5s ease-out forwards;
     pointer-events: none;
 }
 
 @keyframes floatUp {
     0% { transform: translateY(0) scale(1); opacity: 1; }
-    100% { transform: translateY(-300px) scale(1.8); opacity: 0; }
+    100% { transform: translateY(-350px) scale(2); opacity: 0; }
 }
 
+/* 📸 Image Container */
 .image-container {
     margin-top: 50px;
     display: none;
     justify-content: center;
-    gap: 30px;
+    gap: 25px;
     flex-wrap: wrap;
 }
 
+/* Bigger and natural size */
 .image-container img {
-    width: 220px;
-    max-width: 80%;
+    width: 320px;
+    max-width: 90%;
+    height: auto;
     border-radius: 20px;
     box-shadow: 0 10px 25px rgba(0,0,0,0.3);
-    transform: scale(0);
     animation: imgPop 0.8s ease forwards;
 }
 
 @keyframes imgPop {
-    0% { transform: scale(0); }
-    100% { transform: scale(1); }
+    0% { transform: scale(0); opacity: 0; }
+    100% { transform: scale(1); opacity: 1; }
 }
 
 /* 📱 Mobile Responsive */
 @media (max-width: 600px) {
-    h1 {
-        font-size: 28px;
-    }
-
-    button {
-        font-size: 20px;
-        padding: 12px 25px;
-    }
-
-    #message {
-        font-size: 24px;
-    }
+    h1 { font-size: 28px; }
+    button { font-size: 20px; padding: 12px 25px; }
+    #message { font-size: 24px; }
 
     .image-container img {
-        width: 160px;
+        width: 90%;
     }
 }
 </style>
@@ -107,12 +109,13 @@ button:hover {
 <body>
 
 <h1>Click to Unlock a Surprise 💓</h1>
-<button onclick="showMagic()">Click Pannu 😘</button>
+<button onclick="showMagic()">Click Pannu Da 😘</button>
 <div id="message"></div>
 
 <div class="image-container" id="photoBox">
-    <img src="pic1.png" alt="Memory 1">
-    <img src="pic2.png" alt="Memory 2">
+    <img src="pic1.jpeg" alt="Memory 1">
+    <img src="pic2.jpeg" alt="Memory 2">
+    <img src="pic3.jpeg" alt="Memory 3">
 </div>
 
 <script>
@@ -123,8 +126,8 @@ const messages = [
     "Dai enna da pannithe iruke 💕",
     "I miss you my baby sha 😘",
     "Enne miss pandriya illeya? 💓",
-    "Thinking of you hihi 💖",
     "See you tonight buddu 🥰",
+    "Sikirem vaaa enkithe 😘",
     "ummmmmmmmmmmaaaaaahhh 😘😘😘😘💋💋💋"
 ];
 
@@ -136,7 +139,7 @@ const backgrounds = [
     "linear-gradient(45deg, #84fab0, #8fd3f4)"
 ];
 
-const emojis = ["❤️","💖","💕","😘","💋","💓","🥰"];
+const emojis = ["❤️","💖","💕","😘","💋","💓","🥰","💞","💘","✨"];
 
 function showMagic() {
 
@@ -145,8 +148,14 @@ function showMagic() {
     document.body.style.background =
         backgrounds[(clickCount - 1) % backgrounds.length];
 
-    for (let i = 0; i < 20; i++) {
+    // Big love explosion
+    for (let i = 0; i < 50; i++) {
         createEmoji();
+    }
+
+    // Extra heart rain
+    for (let i = 0; i < 20; i++) {
+        setTimeout(createEmoji, i * 120);
     }
 
     if (clickCount <= messages.length) {
@@ -167,14 +176,16 @@ function createEmoji() {
     emoji.className = "emoji";
     emoji.innerText =
         emojis[Math.floor(Math.random() * emojis.length)];
+
     emoji.style.left = Math.random() * window.innerWidth + "px";
     emoji.style.top = window.innerHeight + "px";
-    emoji.style.fontSize = (20 + Math.random() * 50) + "px";
+    emoji.style.fontSize = (25 + Math.random() * 60) + "px";
+
     document.body.appendChild(emoji);
 
     setTimeout(() => {
         emoji.remove();
-    }, 2000);
+    }, 2500);
 }
 
 </script>
