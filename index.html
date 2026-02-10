@@ -2,6 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Heart Surprise 💓</title>
 
 <style>
@@ -11,9 +12,16 @@ body {
     overflow-x: hidden;
     min-height: 100vh;
     margin: 0;
-    padding-top: 80px;
+    padding: 20px;
+    padding-top: 60px;
     transition: background 1s;
     background: linear-gradient(45deg, #ff9a9e, #fad0c4);
+}
+
+h1 {
+    font-size: 36px;
+    color: white;
+    text-shadow: 2px 2px 10px rgba(0,0,0,0.3);
 }
 
 button {
@@ -57,10 +65,12 @@ button:hover {
     display: none;
     justify-content: center;
     gap: 30px;
+    flex-wrap: wrap;
 }
 
 .image-container img {
     width: 220px;
+    max-width: 80%;
     border-radius: 20px;
     box-shadow: 0 10px 25px rgba(0,0,0,0.3);
     transform: scale(0);
@@ -72,6 +82,25 @@ button:hover {
     100% { transform: scale(1); }
 }
 
+/* 📱 Mobile Responsive */
+@media (max-width: 600px) {
+    h1 {
+        font-size: 28px;
+    }
+
+    button {
+        font-size: 20px;
+        padding: 12px 25px;
+    }
+
+    #message {
+        font-size: 24px;
+    }
+
+    .image-container img {
+        width: 160px;
+    }
+}
 </style>
 </head>
 
@@ -113,22 +142,18 @@ function showMagic() {
 
     clickCount++;
 
-    // Change background every click
     document.body.style.background =
         backgrounds[(clickCount - 1) % backgrounds.length];
 
-    // Emoji explosion
     for (let i = 0; i < 20; i++) {
         createEmoji();
     }
 
-    // Show messages one by one
     if (clickCount <= messages.length) {
         document.getElementById("message").innerText =
             messages[clickCount - 1];
     }
 
-    // After last message (6th click) show surprise images
     if (clickCount === messages.length) {
         setTimeout(() => {
             document.getElementById("message").innerText = "Surprise for you 💓";
